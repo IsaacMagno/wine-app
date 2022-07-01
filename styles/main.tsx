@@ -58,3 +58,35 @@ export const Button = styled.button`
 export const Div = styled.div`
   text-align: center;
 `;
+
+export const DetailsDiv = styled.div`
+  background: white;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  text-decoration: none;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  margin: 1rem;
+  padding: 3rem;
+  width: 50%;
+`;
+
+export const ImageDiv = styled.div`
+  background: white;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  text-decoration: none;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  margin: 1rem;
+  padding: 5rem;
+  width: 20%;
+`;
