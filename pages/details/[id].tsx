@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { GetServerSideProps } from "next";
 import { GetWineResults } from "../../types";
 import imageLoader from "../../imageLoader";
@@ -5,7 +6,17 @@ import Image from "next/image";
 import { Container, DetailsDiv, ImageDiv } from "../../styles/main";
 
 const WineDetails = ({ wine }: any) => {
-  console.log(wine);
+  useEffect(() => {
+    const cart: any = localStorage.getItem("cart");
+    const cartItems = JSON.parse(cart);
+    console.log(cartItems);
+    console.log(wine.id);
+
+    const x = cartItems.items.filter((ci: any) => ci.id === wine.id); // tipo inccompativel
+
+    console.log(x);
+  }, []);
+
   return (
     <Container>
       <ImageDiv>

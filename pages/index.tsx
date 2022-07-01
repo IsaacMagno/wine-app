@@ -8,23 +8,66 @@ import imageLoader from "../imageLoader";
 import { Container, Card, Button, Div } from "../styles/main";
 
 const Home: NextPage<{ wines: Wine[] }> = ({ wines }) => {
+  const [wineList, setWineList] = useState(wines);
+
   const handleChange = ({ value }: any) => {
     if (value === "0") {
-      console.log("acima 40");
+      const w: any = wines.filter((wi) => wi.price < 40);
+      setWineList(w);
     }
     if (value === "1") {
-      console.log("40 60");
-      console.log(wines);
+      const w: any = wines.filter((wi) => wi.price > 40 && wi.price < 60);
+      setWineList(w);
     }
     if (value === "2") {
-      console.log("100 200");
+      const w: any = wines.filter((wi) => wi.price > 100 && wi.price < 200);
+      setWineList(w);
     }
     if (value === "3") {
-      console.log("200 500");
+      const w: any = wines.filter((wi) => wi.price > 200 && wi.price < 500);
+      setWineList(w);
     }
     if (value === "4") {
-      console.log("acima 500");
+      const w: any = wines.filter((wi) => wi.price > 500);
+      setWineList(w);
     }
+  };
+
+  const handleSubmit = ({ value }: any) => {
+    const cart = localStorage.getItem("cart");
+    let cartItems: any;
+
+    let isAdded = false;
+
+    if (!cart) {
+      cartItems = {
+        items: [
+          {
+            id: value,
+            qty: 1,
+          },
+        ],
+      };
+    } else {
+      cartItems = JSON.parse(cart);
+      cartItems.items = cartItems.items.map((ci: any) => {
+        if (ci.id === value) {
+          isAdded = true;
+          return { id: ci.id, qty: ci.qty + 1 };
+        }
+
+        return { id: ci.id, qty: ci.qty };
+      });
+
+      if (!isAdded) {
+        cartItems.items.push({
+          id: value,
+          qty: 1,
+        });
+      }
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cartItems));
   };
 
   return (
@@ -43,7 +86,7 @@ const Home: NextPage<{ wines: Wine[] }> = ({ wines }) => {
           <option value='4'>Acima de R$ 500</option>
         </select>
       </div>
-      {wines.map((wine) => {
+      {wineList.map((wine) => {
         return (
           <Div>
             <Link href={`/details/${wine.id}`}>
@@ -62,7 +105,12 @@ const Home: NextPage<{ wines: Wine[] }> = ({ wines }) => {
                 <p>{`Não Sócio R$ ${wine.priceNonMember}`}</p>
               </Card>
             </Link>
-            <Button>Adicionar</Button>
+            <Button
+              onClick={({ target }) => handleSubmit(target)}
+              value={wine.id}
+            >
+              Adicionar
+            </Button>
           </Div>
         );
       })}
