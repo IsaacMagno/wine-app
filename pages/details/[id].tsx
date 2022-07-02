@@ -1,24 +1,40 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import { GetWineResults } from "../../types";
 import imageLoader from "../../imageLoader";
 import Image from "next/image";
+import Link from "next/link";
 import { Container, DetailsDiv, ImageDiv } from "../../styles/main";
+import { handleSubmit } from "../../functions/handleSubmit";
 
 const WineDetails = ({ wine }: any) => {
+  const [wineQty, setWineQty] = useState(0);
+  const [reRender, setReRender] = useState(false);
+
+  const actualize = (target: any) => {
+    handleSubmit(target);
+
+    setReRender(true);
+  };
+
   useEffect(() => {
     const cart: any = localStorage.getItem("cart");
     const cartItems = JSON.parse(cart);
-    console.log(cartItems);
-    console.log(wine.id);
+    const { items } = cartItems;
 
-    const x = cartItems.items.filter((ci: any) => ci.id === wine.id); // tipo inccompativel
+    const selected = items[wine.id];
+    if (selected) {
+      setWineQty(selected.qty);
+    }
 
-    console.log(x);
-  }, []);
+    setReRender(false);
+  }, [reRender]);
 
   return (
     <Container>
+      <div>
+        <Link href='/'>Voltar</Link>
+      </div>
       <ImageDiv>
         <Image
           src={wine.image}
@@ -45,8 +61,9 @@ const WineDetails = ({ wine }: any) => {
         <strong>Comentário do Sommelier</strong>
         <p>{wine.sommelierComment}</p>
         <p>
-          <button>+ | 0</button>
-          <button>Adicionar</button>
+          <button onClick={({ target }) => actualize(target)} value={wine.id}>
+            + | {wineQty} Adicionar
+          </button>
         </p>
       </DetailsDiv>
     </Container>

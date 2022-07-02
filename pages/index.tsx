@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Wine, GetWineResults } from "../types";
 import imageLoader from "../imageLoader";
 import { Container, Card, Button, Div } from "../styles/main";
+import { handleSubmit } from "../functions/handleSubmit";
 
 const Home: NextPage<{ wines: Wine[] }> = ({ wines }) => {
   const [wineList, setWineList] = useState(wines);
@@ -31,43 +32,6 @@ const Home: NextPage<{ wines: Wine[] }> = ({ wines }) => {
       const w: any = wines.filter((wi) => wi.price > 500);
       setWineList(w);
     }
-  };
-
-  const handleSubmit = ({ value }: any) => {
-    const cart = localStorage.getItem("cart");
-    let cartItems: any;
-
-    let isAdded = false;
-
-    if (!cart) {
-      cartItems = {
-        items: [
-          {
-            id: value,
-            qty: 1,
-          },
-        ],
-      };
-    } else {
-      cartItems = JSON.parse(cart);
-      cartItems.items = cartItems.items.map((ci: any) => {
-        if (ci.id === value) {
-          isAdded = true;
-          return { id: ci.id, qty: ci.qty + 1 };
-        }
-
-        return { id: ci.id, qty: ci.qty };
-      });
-
-      if (!isAdded) {
-        cartItems.items.push({
-          id: value,
-          qty: 1,
-        });
-      }
-    }
-
-    localStorage.setItem("cart", JSON.stringify(cartItems));
   };
 
   return (
