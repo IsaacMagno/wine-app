@@ -1,17 +1,26 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 5vh 95vh;
+
+  grid-template-areas:
+    "h h"
+    "m c";
+
+  background: #f5f5f5;
+`;
+
+export const HeaderDiv = styled.div`
+  grid-area: h;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  background: gainsboro;
+  background: #ffffff;
+  justify-content: space-around;
 `;
 
 export const Card = styled.div`
   background: white;
-  color: rgba(0, 0, 0, 0.125);
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -34,59 +43,78 @@ export const Card = styled.div`
     color: #2b2d42;
     border-color: #2b2d42;
   }
-`;
-
-export const LinkCard = styled.a`
-  text-decoration: none;
-  color: inherit;
+  grid-area: c;
 `;
 
 export const Button = styled.button`
-  color: #2222229a
-  background-color: #fff;
+  color: #fff;
+  background-color: #7ebc43;
+
   border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 1rem;
-  margin: 0.2rem;
+  border-radius: 0.5rem;
+
+  margin: 0.01rem;
   cursor: pointer;
+  padding: 1rem 7.3rem;
+
   &:hover {
     color: #2b2d42;
-    border-color: #2b2d42;
+    border-color: rgba(0, 0, 0, 0.125);
   }
-  padding: 1rem;
+`;
+
+export const BackButton = styled.button`
+  border: none;
+  background: none;
+  font-size: 20px;
+
+  cursor: pointer;
+
+  margin: 13px 30px;
+  position: absolute;
 `;
 
 export const Div = styled.div`
   text-align: center;
 `;
 
+export const Select = styled.div`
+  background-clip: border-box;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  margin-left: 4rem;
+  text-align: left;
+  grid-area: m;
+`;
+
+export const ContainerWines = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  grid-area: c;
+`;
+
 export const DetailsDiv = styled.div`
-  background: white;
   display: flex;
   flex-direction: column;
   text-align: center;
-  text-decoration: none;
-  word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
   margin: 1rem;
   padding: 3rem;
-  width: 50%;
+  grid-area: c;
 `;
 
 export const ImageDiv = styled.div`
-  background: white;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  text-decoration: none;
-  word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
   margin: 1rem;
   padding: 5rem;
-  width: 20%;
+
+  grid-area: m;
 `;

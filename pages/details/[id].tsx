@@ -3,13 +3,22 @@ import { GetServerSideProps } from "next";
 import { GetWineResults } from "../../types";
 import imageLoader from "../../imageLoader";
 import Image from "next/image";
-import Link from "next/link";
-import { Container, DetailsDiv, ImageDiv } from "../../styles/main";
+import { useRouter } from "next/router";
+import {
+  Container,
+  DetailsDiv,
+  ImageDiv,
+  Button,
+  BackButton,
+} from "../../styles/main";
 import { handleSubmit } from "../../functions/handleSubmit";
+import Header from "../../components/Header";
 
 const WineDetails = ({ wine }: any) => {
   const [wineQty, setWineQty] = useState(0);
   const [reRender, setReRender] = useState(false);
+
+  const router = useRouter();
 
   const actualize = (target: any) => {
     handleSubmit(target);
@@ -31,42 +40,46 @@ const WineDetails = ({ wine }: any) => {
   }, [reRender]);
 
   return (
-    <Container>
-      <div>
-        <Link href='/'>Voltar</Link>
-      </div>
-      <ImageDiv>
-        <Image
-          src={wine.image}
-          width='300'
-          height='400'
-          loader={imageLoader}
-          unoptimized
-        />
-      </ImageDiv>
-      <DetailsDiv>
-        <h1>{wine.name}</h1>
-        <p>
+    <div>
+      <Header />
+      <Container>
+        <div>
+          <BackButton onClick={() => router.push("/")}>
+            {` <`} Voltar
+          </BackButton>
+        </div>
+        <ImageDiv style={{ position: "relative" }}>
           <Image
-            src={wine.flag}
-            width='25'
-            height='25'
+            src={wine.image}
+            layout='fill'
+            objectFit='contain'
             loader={imageLoader}
             unoptimized
           />
-          {wine.country} {wine.type} {wine.classification} {wine.rating}
-        </p>
-        <h3>R$ {wine.priceMember}</h3>
-        <h4>Não sócio R$ {wine.priceNonMember}</h4>
-        <strong>Comentário do Sommelier</strong>
-        <p>{wine.sommelierComment}</p>
-        <p>
-          <button onClick={({ target }) => actualize(target)} value={wine.id}>
-            + | {wineQty} Adicionar
-          </button>
-        </p>
-      </DetailsDiv>
-    </Container>
+        </ImageDiv>
+        <DetailsDiv>
+          <h1>{wine.name}</h1>
+          <p>
+            <img
+              src={wine.flag}
+              style={{ width: "20px", height: "20px", marginRight: "8px" }}
+            />
+            {wine.country} {wine.type} {wine.classification}{" "}
+            <img src='https://img.wine.com.br/fenix/image/_big_bang/icons/star.svg' />{" "}
+            {wine.rating}
+          </p>
+          <h3>R$ {wine.priceMember}</h3>
+          <h4>Não sócio R$ {wine.priceNonMember}</h4>
+          <strong>Comentário do Sommelier</strong>
+          <p>{wine.sommelierComment}</p>
+          <p>
+            <Button onClick={({ target }) => actualize(target)} value={wine.id}>
+              + | {wineQty} Adicionar
+            </Button>
+          </p>
+        </DetailsDiv>
+      </Container>
+    </div>
   );
 };
 
