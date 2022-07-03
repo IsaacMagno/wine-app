@@ -5,7 +5,7 @@ import imageLoader from "../../imageLoader";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import {
-  Container,
+  ContainerDetails,
   DetailsDiv,
   ImageDiv,
   Button,
@@ -42,7 +42,7 @@ const WineDetails = ({ wine }: any) => {
   return (
     <div>
       <Header />
-      <Container>
+      <ContainerDetails>
         <div>
           <BackButton onClick={() => router.push("/")}>
             {` <`} Voltar
@@ -78,7 +78,7 @@ const WineDetails = ({ wine }: any) => {
             </Button>
           </p>
         </DetailsDiv>
-      </Container>
+      </ContainerDetails>
     </div>
   );
 };

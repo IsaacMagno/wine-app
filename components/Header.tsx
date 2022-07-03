@@ -1,17 +1,15 @@
-import { HeaderDiv } from "../styles/main";
+import { HeaderDiv, NavBar, Logo, NavItem } from "../styles/main";
 
 const Header = () => {
+  const nav = ["Clube", "Loja", "Produtores", "Ofertas", "Eventos"];
   return (
     <HeaderDiv>
-      <h3>WINE</h3>
-      <p>Clube</p>
-      <p>Loja</p>
-      <p>Produtores</p>
-      <p>Ofertas</p>
-      <p>Eventos</p>
-      <h1>Pesquisar</h1>
-      <h1>Perfil</h1>
-      <h1>Carrinho</h1>
+      <Logo>WINE</Logo>
+      <NavBar>
+        {nav.map((n) => (
+          <NavItem>{n}</NavItem>
+        ))}
+      </NavBar>
     </HeaderDiv>
   );
 };

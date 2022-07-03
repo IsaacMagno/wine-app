@@ -10,6 +10,20 @@ export const Container = styled.div`
     "m c";
 
   background: #f5f5f5;
+
+  height: 170em;
+`;
+
+export const ContainerDetails = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 5vh 95vh;
+
+  grid-template-areas:
+    "h h"
+    "m c";
+
+  background: #f5f5f5;
 `;
 
 export const HeaderDiv = styled.div`
@@ -117,4 +131,21 @@ export const ImageDiv = styled.div`
   padding: 5rem;
 
   grid-area: m;
+`;
+
+export const NavBar = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const Logo = styled.h4`
+  padding: 10px;
+`;
+
+export const NavItem = styled.p`
+  padding: 15px 40px;
+  &:hover {
+    color: #c81a78;
+  }
+  cursor: pointer;
 `;

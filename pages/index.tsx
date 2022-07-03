@@ -17,49 +17,70 @@ import { handleSubmit } from "../functions/handleSubmit";
 import Header from "../components/Header";
 import axios from "axios";
 
-const Home: NextPage<{ wines: Wine[] }> = ({ wines }) => {
+const Home: NextPage<{ wines: any; data: GetWineResults }> = ({
+  wines,
+  data,
+}) => {
   const [wineList, setWineList] = useState(wines);
-  const [wineData, setWineData] = useState([]);
+  const [winePages, setPage] = useState([0, 10]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const d = await axios
-        .get("https://wine-back-test.herokuapp.com/products?page=1&limit=10")
-        .then((o) => o.data);
+    const pagination = () => {
+      const d = wines;
 
-      setWineData(d);
+      if (winePages[0] < 0) {
+        setPage([0, 10]);
+      }
+
+      if (winePages[1] > 70) {
+        setPage([60, 70]);
+      }
+
+      const show = d.slice(...winePages);
+
+      setWineList(show);
     };
 
-    fetchData();
-  }, []);
-
-  console.log(wineData);
+    pagination();
+  }, [winePages]);
 
   const handleChange = ({ target }: any) => {
     const { value } = target;
     if (value === "0") {
-      const w: any = wines.filter((wi) => wi.price < 40);
+      const w: any = wines.filter((wi: any) => wi.price < 40);
       setWineList(w);
     }
     if (value === "1") {
-      const w: any = wines.filter((wi) => wi.price > 40 && wi.price < 60);
+      const w: any = wines.filter((wi: any) => wi.price > 40 && wi.price < 60);
       setWineList(w);
     }
     if (value === "2") {
-      const w: any = wines.filter((wi) => wi.price > 100 && wi.price < 200);
+      const w: any = wines.filter(
+        (wi: any) => wi.price > 100 && wi.price < 200
+      );
       setWineList(w);
     }
     if (value === "3") {
-      const w: any = wines.filter((wi) => wi.price > 200 && wi.price < 500);
+      const w: any = wines.filter(
+        (wi: any) => wi.price > 200 && wi.price < 500
+      );
       setWineList(w);
     }
     if (value === "4") {
-      const w: any = wines.filter((wi) => wi.price > 500);
+      const w: any = wines.filter((wi: any) => wi.price > 500);
       setWineList(w);
     }
     if (value === "5") {
       setWineList(wines);
     }
+  };
+
+  const handleSearch = ({ target }: any) => {
+    const { value } = target;
+    const filteredResult = wines.filter((w: any) =>
+      w.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setWineList(filteredResult);
   };
 
   return (
@@ -75,6 +96,13 @@ const Home: NextPage<{ wines: Wine[] }> = ({ wines }) => {
         <Select>
           <h3>Refine sua busca</h3>
           <form>
+            <input
+              type='text'
+              placeholder='Pesquisar'
+              onChange={(event) => handleSearch(event)}
+            />
+            <br />
+            <br />
             <input
               type='radio'
               name='wine-price'
@@ -122,41 +150,59 @@ const Home: NextPage<{ wines: Wine[] }> = ({ wines }) => {
               onChange={(event) => handleChange(event)}
             />
             <label>Limpar</label>
+            <br />
+            <br />
           </form>
+          <div>
+            <button
+              onClick={() => setPage([winePages[0] - 10, winePages[1] - 10])}
+            >
+              Anterior
+            </button>
+            <button
+              onClick={() => setPage([winePages[0] + 10, winePages[1] + 10])}
+            >
+              Próxima
+            </button>
+          </div>
         </Select>
         <ContainerWines>
-          {wineList.map((wine) => {
-            return (
-              <Div>
-                <Link href={`/details/${wine.id}`}>
-                  <Card key={wine.id} style={{ position: "relative" }}>
-                    <Image
-                      loader={imageLoader}
-                      unoptimized
-                      src={wine.image}
-                      alt={wine.name}
-                      width='200'
-                      height='500'
-                      objectFit='contain'
-                    />
-                    <h4>{wine.name}</h4>
-                    <p>{`${wine.discount}% OFF`}</p>
-                    <p>
-                      <strong>Sócio Wine R$ </strong>
-                      {wine.priceMember}
-                    </p>
-                    <p>{`Não Sócio R$ ${wine.priceNonMember}`}</p>
-                  </Card>
-                </Link>
-                <Button
-                  onClick={({ target }) => handleSubmit(target)}
-                  value={wine.id}
-                >
-                  Adicionar
-                </Button>
-              </Div>
-            );
-          })}
+          {wineList ? (
+            wineList.map((wine: any) => {
+              return (
+                <Div>
+                  <Link href={`/details/${wine.id}`}>
+                    <Card key={wine.id} style={{ position: "relative" }}>
+                      <Image
+                        loader={imageLoader}
+                        unoptimized
+                        src={wine.image}
+                        alt={wine.name}
+                        width='200'
+                        height='500'
+                        objectFit='contain'
+                      />
+                      <h4>{wine.name}</h4>
+                      <p>{`${wine.discount}% OFF`}</p>
+                      <p>
+                        <strong>Sócio Wine R$ </strong>
+                        {wine.priceMember}
+                      </p>
+                      <p>{`Não Sócio R$ ${wine.priceNonMember}`}</p>
+                    </Card>
+                  </Link>
+                  <Button
+                    onClick={({ target }) => handleSubmit(target)}
+                    value={wine.id}
+                  >
+                    Adicionar
+                  </Button>
+                </Div>
+              );
+            })
+          ) : (
+            <div>Loading...</div>
+          )}
         </ContainerWines>
       </Container>
     </div>
@@ -164,12 +210,14 @@ const Home: NextPage<{ wines: Wine[] }> = ({ wines }) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch("https://wine-back-test.herokuapp.com/products");
-  const { items }: GetWineResults = await res.json();
+  const res = await axios
+    .get("https://wine-back-test.herokuapp.com/products")
+    .then((o) => o.data);
 
   return {
     props: {
-      wines: items,
+      wines: res.items,
+      data: res,
     },
   };
 };
