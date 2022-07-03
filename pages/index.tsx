@@ -3,7 +3,6 @@ import type { NextPage, GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { Wine, GetWineResults } from "../types";
 import imageLoader from "../imageLoader";
 import {
   Container,
@@ -12,17 +11,27 @@ import {
   Div,
   Select,
   ContainerWines,
+  PageButton,
+  Search,
 } from "../styles/main";
 import { handleSubmit } from "../functions/handleSubmit";
 import Header from "../components/Header";
 import axios from "axios";
 
-const Home: NextPage<{ wines: any; data: GetWineResults }> = ({
-  wines,
-  data,
-}) => {
+const Home: NextPage<{ wines: any }> = ({ wines }) => {
   const [wineList, setWineList] = useState(wines);
   const [winePages, setPage] = useState([0, 10]);
+  const [reRender, setReRender] = useState(false);
+
+  const actualize = (target: any) => {
+    handleSubmit(target);
+
+    setReRender(true);
+  };
+
+  useEffect(() => {
+    setReRender(false);
+  }, [reRender]);
 
   useEffect(() => {
     const pagination = () => {
@@ -96,7 +105,7 @@ const Home: NextPage<{ wines: any; data: GetWineResults }> = ({
         <Select>
           <h3>Refine sua busca</h3>
           <form>
-            <input
+            <Search
               type='text'
               placeholder='Pesquisar'
               onChange={(event) => handleSearch(event)}
@@ -154,20 +163,20 @@ const Home: NextPage<{ wines: any; data: GetWineResults }> = ({
             <br />
           </form>
           <div>
-            <button
+            <PageButton
               onClick={() => setPage([winePages[0] - 10, winePages[1] - 10])}
             >
               Anterior
-            </button>
-            <button
+            </PageButton>
+            <PageButton
               onClick={() => setPage([winePages[0] + 10, winePages[1] + 10])}
             >
               Próxima
-            </button>
+            </PageButton>
           </div>
         </Select>
         <ContainerWines>
-          {wineList ? (
+          {wineList.length > 0 ? (
             wineList.map((wine: any) => {
               return (
                 <Div>
@@ -192,7 +201,7 @@ const Home: NextPage<{ wines: any; data: GetWineResults }> = ({
                     </Card>
                   </Link>
                   <Button
-                    onClick={({ target }) => handleSubmit(target)}
+                    onClick={({ target }) => actualize(target)}
                     value={wine.id}
                   >
                     Adicionar
@@ -201,7 +210,7 @@ const Home: NextPage<{ wines: any; data: GetWineResults }> = ({
               );
             })
           ) : (
-            <div>Loading...</div>
+            <div>Sem resultados</div>
           )}
         </ContainerWines>
       </Container>
@@ -217,7 +226,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       wines: res.items,
-      data: res,
     },
   };
 };

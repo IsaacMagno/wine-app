@@ -51,12 +51,7 @@ export const Card = styled.div`
   padding: 1rem;
   transition: color 0.15s ease, border-color 0.15s ease;
   cursor: pointer;
-  &:hover,
-  &:focus,
-  &:active {
-    color: #2b2d42;
-    border-color: #2b2d42;
-  }
+
   grid-area: c;
 `;
 
@@ -70,22 +65,34 @@ export const Button = styled.button`
   margin: 0.01rem;
   cursor: pointer;
   padding: 1rem 7.3rem;
-
-  &:hover {
-    color: #2b2d42;
-    border-color: rgba(0, 0, 0, 0.125);
-  }
 `;
 
 export const BackButton = styled.button`
   border: none;
   background: none;
-  font-size: 20px;
+  font-size: 15px;
 
   cursor: pointer;
 
-  margin: 13px 30px;
+  margin: 10px 30px;
   position: absolute;
+`;
+
+export const PageButton = styled.button`
+  color: #b6116e;
+  background: #f5f5f5;
+
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 1.5rem;
+
+  cursor: pointer;
+  margin: 5px;
+  padding: 8px;
+
+  &:hover {
+    color: #f5f5f5;
+    background: #b6116e;
+  }
 `;
 
 export const Div = styled.div`
@@ -99,6 +106,19 @@ export const Select = styled.div`
   margin-left: 4rem;
   text-align: left;
   grid-area: m;
+`;
+
+export const Search = styled.input`
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 5rem;
+  padding: 10px;
+  margin: 10px;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
 `;
 
 export const ContainerWines = styled.div`
@@ -147,5 +167,17 @@ export const NavItem = styled.p`
   &:hover {
     color: #c81a78;
   }
+  cursor: pointer;
+`;
+
+export const CartTotal = styled.p`
+  margin: 10px;
+  align-self: center;
+  fontsize: 15px;
+
+  &:hover {
+    color: #c81a78;
+  }
+
   cursor: pointer;
 `;

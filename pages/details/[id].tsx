@@ -13,6 +13,7 @@ import {
 } from "../../styles/main";
 import { handleSubmit } from "../../functions/handleSubmit";
 import Header from "../../components/Header";
+import back from "../../icons/costas.png";
 
 const WineDetails = ({ wine }: any) => {
   const [wineQty, setWineQty] = useState(0);
@@ -24,6 +25,26 @@ const WineDetails = ({ wine }: any) => {
     handleSubmit(target);
 
     setReRender(true);
+  };
+
+  const handleDelete = ({ value }: any) => {
+    const cart: any = localStorage.getItem("cart");
+    const cartItems = JSON.parse(cart);
+
+    const selected = cartItems.items[wine.id];
+    if (selected) {
+      setWineQty(selected.qty - 1);
+    }
+
+    cartItems.items = cartItems.items.map((ci: any) => {
+      if (ci.id === value) {
+        return { id: ci.id, qty: ci.qty - 1 };
+      }
+
+      return { id: ci.id, qty: ci.qty };
+    });
+
+    localStorage.setItem("cart", JSON.stringify(cartItems));
   };
 
   useEffect(() => {
@@ -45,7 +66,13 @@ const WineDetails = ({ wine }: any) => {
       <ContainerDetails>
         <div>
           <BackButton onClick={() => router.push("/")}>
-            {` <`} Voltar
+            <Image
+              src={back}
+              width={25}
+              height={25}
+              loader={imageLoader}
+              unoptimized
+            />
           </BackButton>
         </div>
         <ImageDiv style={{ position: "relative" }}>
@@ -74,8 +101,15 @@ const WineDetails = ({ wine }: any) => {
           <p>{wine.sommelierComment}</p>
           <p>
             <Button onClick={({ target }) => actualize(target)} value={wine.id}>
-              + | {wineQty} Adicionar
+              +
             </Button>
+            <Button
+              onClick={({ target }) => handleDelete(target)}
+              value={wine.id}
+            >
+              -
+            </Button>
+            <Button>{wineQty} Adicionar</Button>
           </p>
         </DetailsDiv>
       </ContainerDetails>
