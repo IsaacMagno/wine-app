@@ -8,8 +8,8 @@ import {
   ContainerDetails,
   DetailsDiv,
   ImageDiv,
-  Button,
   BackButton,
+  AddButtons,
 } from "../../styles/main";
 import { handleSubmit } from "../../functions/handleSubmit";
 import Header from "../../components/Header";
@@ -32,23 +32,31 @@ const WineDetails = ({ wine }: any) => {
     const cartItems = JSON.parse(cart);
 
     const selected = cartItems.items[wine.id];
+
     if (selected) {
-      setWineQty(selected.qty - 1);
+      if (selected.qty > 0) {
+        setWineQty(selected.qty - 1);
+
+        cartItems.items = cartItems.items.map((ci: any) => {
+          if (ci.id === value) {
+            return { id: ci.id, qty: ci.qty - 1 };
+          }
+
+          return { id: ci.id, qty: ci.qty };
+        });
+      } else {
+        cartItems.items = cartItems.items.filter((ci: any) => ci.id !== value);
+      }
     }
 
-    cartItems.items = cartItems.items.map((ci: any) => {
-      if (ci.id === value) {
-        return { id: ci.id, qty: ci.qty - 1 };
-      }
-
-      return { id: ci.id, qty: ci.qty };
-    });
-
     localStorage.setItem("cart", JSON.stringify(cartItems));
+    setReRender(true);
   };
 
   useEffect(() => {
     const cart: any = localStorage.getItem("cart");
+    if (!cart) return setWineQty(0);
+
     const cartItems = JSON.parse(cart);
     const { items } = cartItems;
 
@@ -100,16 +108,19 @@ const WineDetails = ({ wine }: any) => {
           <strong>Comentário do Sommelier</strong>
           <p>{wine.sommelierComment}</p>
           <p>
-            <Button onClick={({ target }) => actualize(target)} value={wine.id}>
+            <AddButtons
+              onClick={({ target }) => actualize(target)}
+              value={wine.id}
+            >
               +
-            </Button>
-            <Button
+            </AddButtons>
+            <AddButtons>{wineQty}</AddButtons>
+            <AddButtons
               onClick={({ target }) => handleDelete(target)}
               value={wine.id}
             >
               -
-            </Button>
-            <Button>{wineQty} Adicionar</Button>
+            </AddButtons>
           </p>
         </DetailsDiv>
       </ContainerDetails>

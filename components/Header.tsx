@@ -7,11 +7,14 @@ import CartIcon from "../icons/shopping-cart.png";
 
 const Header = () => {
   const [winesQty, setWinesQty] = useState(0);
+  const [empty, setEmpty] = useState(false);
   const nav = ["Clube", "Loja", "Produtores", "Ofertas", "Eventos"];
   const router = useRouter();
 
   useEffect(() => {
     const cart: any = localStorage.getItem("cart");
+    if (!cart) return setEmpty(true);
+
     const cartItems = JSON.parse(cart);
     const { items } = cartItems;
 
@@ -30,7 +33,7 @@ const Header = () => {
           </NavItem>
         ))}
       </NavBar>
-      <NavBar>
+      <NavBar onClick={() => router.push("/cart")}>
         <Image
           loader={imageLoader}
           unoptimized
@@ -41,7 +44,7 @@ const Header = () => {
           objectFit='contain'
           style={{ cursor: "pointer" }}
         />
-        <CartTotal>{winesQty}</CartTotal>
+        {empty ? <CartTotal>0</CartTotal> : <CartTotal>{winesQty}</CartTotal>}
       </NavBar>
     </HeaderDiv>
   );

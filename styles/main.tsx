@@ -26,6 +26,19 @@ export const ContainerDetails = styled.div`
   background: #f5f5f5;
 `;
 
+export const ContainerCard = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 5vh 50vh 45vh;
+
+  grid-template-areas:
+    "h h"
+    "c c"
+    ". .";
+
+  background: #f5f5f5;
+`;
+
 export const HeaderDiv = styled.div`
   grid-area: h;
   display: flex;
@@ -65,6 +78,18 @@ export const Button = styled.button`
   margin: 0.01rem;
   cursor: pointer;
   padding: 1rem 7.3rem;
+`;
+
+export const AddButtons = styled.button`
+  color: #fff;
+  background-color: #7ebc43;
+
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.5rem;
+
+  margin: 0.1rem;
+  cursor: pointer;
+  padding: 0.5rem 3rem;
 `;
 
 export const BackButton = styled.button`
@@ -140,6 +165,15 @@ export const DetailsDiv = styled.div`
   margin: 1rem;
   padding: 3rem;
   grid-area: c;
+`;
+
+export const CardDiv = styled.div`
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  margin: 3px;
+  padding: 3rem;
 `;
 
 export const ImageDiv = styled.div`
