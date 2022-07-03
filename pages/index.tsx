@@ -51,7 +51,7 @@ const Home: NextPage<{ wines: any }> = ({ wines }) => {
     };
 
     pagination();
-  }, [winePages, wines]);
+  }, [winePages]);
 
   const handleChange = ({ target }: any) => {
     const { value } = target;

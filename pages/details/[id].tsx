@@ -66,7 +66,7 @@ const WineDetails = ({ wine }: any) => {
     }
 
     setReRender(false);
-  }, [reRender, wine]);
+  }, [reRender]);
 
   return (
     <div>

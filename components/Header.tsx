@@ -21,7 +21,7 @@ const Header = () => {
     const total = items.reduce((acc: any, item: any) => acc + item.qty, 0);
 
     setWinesQty(total);
-  }, [empty]);
+  });
 
   return (
     <HeaderDiv>
