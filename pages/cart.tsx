@@ -29,7 +29,7 @@ const Cart = ({ wines }: any) => {
     });
 
     SetCartItems(itemOnCart);
-  }, []);
+  }, [wines]);
 
   return (
     <div>
@@ -47,7 +47,7 @@ const Cart = ({ wines }: any) => {
           ) : (
             itemsOnCart.map((i: any) => {
               return (
-                <CardDiv>
+                <CardDiv key={i.id}>
                   <ul style={{ listStyleType: "none" }}>
                     <li>Produto: {i.name}</li>
                     <li>Preço: R$ {i.price}</li>

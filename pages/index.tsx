@@ -51,7 +51,7 @@ const Home: NextPage<{ wines: any }> = ({ wines }) => {
     };
 
     pagination();
-  }, [winePages]);
+  }, [winePages, wines]);
 
   const handleChange = ({ target }: any) => {
     const { value } = target;
@@ -179,9 +179,9 @@ const Home: NextPage<{ wines: any }> = ({ wines }) => {
           {wineList.length > 0 ? (
             wineList.map((wine: any) => {
               return (
-                <Div>
+                <Div key={wine.id}>
                   <Link href={`/details/${wine.id}`}>
-                    <Card key={wine.id} style={{ position: "relative" }}>
+                    <Card style={{ position: "relative" }}>
                       <Image
                         loader={imageLoader}
                         unoptimized

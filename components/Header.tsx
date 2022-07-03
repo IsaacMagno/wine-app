@@ -21,11 +21,11 @@ const Header = () => {
     const total = items.reduce((acc: any, item: any) => acc + item.qty, 0);
 
     setWinesQty(total);
-  });
+  }, [empty]);
 
   return (
     <HeaderDiv>
-      <Logo>WINE</Logo>
+      <Logo onClick={() => router.push("/")}>WINE</Logo>
       <NavBar>
         {nav.map((n, i) => (
           <NavItem onClick={() => router.push("/")} key={n + i}>

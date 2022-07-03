@@ -66,7 +66,7 @@ const WineDetails = ({ wine }: any) => {
     }
 
     setReRender(false);
-  }, [reRender]);
+  }, [reRender, wine]);
 
   return (
     <div>
@@ -76,10 +76,11 @@ const WineDetails = ({ wine }: any) => {
           <BackButton onClick={() => router.push("/")}>
             <Image
               src={back}
-              width={25}
-              height={25}
+              width={18}
+              height={18}
               loader={imageLoader}
               unoptimized
+              alt='back button'
             />
           </BackButton>
         </div>
@@ -90,17 +91,30 @@ const WineDetails = ({ wine }: any) => {
             objectFit='contain'
             loader={imageLoader}
             unoptimized
+            alt={wine.name}
           />
         </ImageDiv>
         <DetailsDiv>
           <h1>{wine.name}</h1>
           <p>
-            <img
+            <Image
+              loader={imageLoader}
               src={wine.flag}
-              style={{ width: "20px", height: "20px", marginRight: "8px" }}
+              width={20}
+              height={20}
+              style={{ marginRight: "8px" }}
+              alt={wine.country}
+              unoptimized
             />
-            {wine.country} {wine.type} {wine.classification}{" "}
-            <img src='https://img.wine.com.br/fenix/image/_big_bang/icons/star.svg' />{" "}
+            {wine.country} {wine.type} {wine.classification}
+            <Image
+              loader={imageLoader}
+              width={17}
+              height={17}
+              src='https://img.wine.com.br/fenix/image/_big_bang/icons/star.svg'
+              alt={wine.rating}
+              unoptimized
+            />
             {wine.rating}
           </p>
           <h3>R$ {wine.priceMember}</h3>

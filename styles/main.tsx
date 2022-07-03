@@ -194,6 +194,7 @@ export const NavBar = styled.div`
 
 export const Logo = styled.h4`
   padding: 10px;
+  cursor: pointer;
 `;
 
 export const NavItem = styled.p`
