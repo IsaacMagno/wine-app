@@ -9,7 +9,8 @@ Nunca tive contato antes com as tecnologias utilizadas, no tempo de 3 dias estud
 ### Principais Tecnologias utilizadas
 
 - [x] NextJs
-- [x] StyledComponents/Css
+- [x] StyledComponents
+- [x] Css
 - [x] TypeScript
 
 ### Como utilizar
