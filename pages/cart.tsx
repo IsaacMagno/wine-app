@@ -105,7 +105,7 @@ const Cart = ({ wines }: any) => {
                 <CardDiv key={i.id}>
                   <div
                     onClick={() => router.push(`/details/${i.id}`)}
-                    style={{ cursor: "pointer", textAlign: "center" }}
+                    style={{ cursor: "pointer" }}
                   >
                     <Image
                       src={i.image}
@@ -115,7 +115,7 @@ const Cart = ({ wines }: any) => {
                       unoptimized
                       alt={i.name}
                     />
-                    <ul style={{ listStyleType: "none" }}>
+                    <ul style={{ listStyleType: "none", marginRight: "3rem" }}>
                       <li>Produto: {i.name}</li>
                       <li>Preço: R$ {i.price}</li>
                       <li>Sócios: R$ {i.priceMember}</li>

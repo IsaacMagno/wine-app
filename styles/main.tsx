@@ -170,6 +170,7 @@ export const DetailsDiv = styled.div`
 export const CardDiv = styled.div`
   width: 18rem;
   height: 22rem;
+  text-align: center;
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
