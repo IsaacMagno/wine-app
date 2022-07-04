@@ -147,7 +147,7 @@ const Cart = ({ wines }: any) => {
           )}
         </div>
       </ContainerCard>
-      <span style={{ marginLeft: "40%" }}>Desenvolvido por @IsaacMagno</span>
+      <>Desenvolvido por @IsaacMagno</>
     </div>
   );
 };

@@ -112,53 +112,65 @@ const Home: NextPage<{ wines: any }> = ({ wines }) => {
             />
             <br />
             <br />
-            <input
-              type='radio'
-              name='wine-price'
-              value='0'
-              onChange={(event) => handleChange(event)}
-            />
-            <label>Até R$ 40</label>
+            <label>
+              <input
+                type='radio'
+                name='wine-price'
+                value='0'
+                onChange={(event) => handleChange(event)}
+              />
+              Até R$ 40
+            </label>
             <br />
-            <input
-              type='radio'
-              name='wine-price'
-              value='1'
-              onChange={(event) => handleChange(event)}
-            />
-            <label>R$ 40 A R$ 60</label>
+            <label>
+              <input
+                type='radio'
+                name='wine-price'
+                value='1'
+                onChange={(event) => handleChange(event)}
+              />
+              R$ 40 A R$ 60
+            </label>
             <br />
-            <input
-              type='radio'
-              name='wine-price'
-              value='2'
-              onChange={(event) => handleChange(event)}
-            />
-            <label>R$ 100 A R$ 200</label>
+            <label>
+              <input
+                type='radio'
+                name='wine-price'
+                value='2'
+                onChange={(event) => handleChange(event)}
+              />
+              R$ 100 A R$ 200
+            </label>
             <br />
-            <input
-              type='radio'
-              name='wine-price'
-              value='3'
-              onChange={(event) => handleChange(event)}
-            />
-            <label>R$ 200 A R$ 500</label>
+            <label>
+              <input
+                type='radio'
+                name='wine-price'
+                value='3'
+                onChange={(event) => handleChange(event)}
+              />
+              R$ 200 A R$ 500
+            </label>
             <br />
-            <input
-              type='radio'
-              name='wine-price'
-              value='4'
-              onChange={(event) => handleChange(event)}
-            />
-            <label>Acima de R$ 500</label>
+            <label>
+              <input
+                type='radio'
+                name='wine-price'
+                value='4'
+                onChange={(event) => handleChange(event)}
+              />
+              Acima de R$ 500
+            </label>
             <br />
-            <input
-              type='radio'
-              name='wine-price'
-              value='5'
-              onChange={(event) => handleChange(event)}
-            />
-            <label>Limpar</label>
+            <label>
+              <input
+                type='radio'
+                name='wine-price'
+                value='5'
+                onChange={(event) => handleChange(event)}
+              />
+              Limpar
+            </label>
             <br />
             <br />
           </form>
