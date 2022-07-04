@@ -13,6 +13,7 @@ const Header = () => {
 
   useEffect(() => {
     const cart: any = localStorage.getItem("cart");
+
     if (!cart) return setEmpty(true);
 
     const cartItems = JSON.parse(cart);
@@ -21,6 +22,7 @@ const Header = () => {
     const total = items.reduce((acc: any, item: any) => acc + item.qty, 0);
 
     setWinesQty(total);
+    setEmpty(false);
   });
 
   return (

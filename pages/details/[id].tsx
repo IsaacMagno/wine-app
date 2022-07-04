@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import { GetWineResults } from "../../types";
 import imageLoader from "../../imageLoader";
+import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import {
@@ -31,11 +32,11 @@ const WineDetails = ({ wine }: any) => {
     const cart: any = localStorage.getItem("cart");
     const cartItems = JSON.parse(cart);
 
-    const selected = cartItems.items[wine.id];
+    const selected = cartItems.items.filter((i: any) => i.id == wine.id);
 
-    if (selected) {
-      if (selected.qty > 0) {
-        setWineQty(selected.qty - 1);
+    if (selected[0]) {
+      if (selected[0].qty > 0) {
+        setWineQty(selected[0].qty - 1);
 
         cartItems.items = cartItems.items.map((ci: any) => {
           if (ci.id === value) {
@@ -60,9 +61,9 @@ const WineDetails = ({ wine }: any) => {
     const cartItems = JSON.parse(cart);
     const { items } = cartItems;
 
-    const selected = items[wine.id];
-    if (selected) {
-      setWineQty(selected.qty);
+    const selected = items.filter((i: any) => i.id == wine.id);
+    if (selected[0]) {
+      setWineQty(selected[0].qty);
     }
 
     setReRender(false);
@@ -70,6 +71,10 @@ const WineDetails = ({ wine }: any) => {
 
   return (
     <div>
+      <Head>
+        <title>Wine - Detalhes</title>
+        <meta name='description' content='Detalhes vinho' />
+      </Head>
       <Header />
       <ContainerDetails>
         <div>
