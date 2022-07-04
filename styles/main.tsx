@@ -176,6 +176,7 @@ export const CardDiv = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
   margin: 3px;
+  margin-left: 0.7rem;
   padding: 1rem;
 `;
 
