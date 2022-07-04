@@ -105,12 +105,12 @@ const Cart = ({ wines }: any) => {
                 <CardDiv key={i.id}>
                   <div
                     onClick={() => router.push(`/details/${i.id}`)}
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: "pointer", textAlign: "center" }}
                   >
                     <Image
                       src={i.image}
-                      width='100'
-                      height='100'
+                      width='80'
+                      height='110'
                       loader={imageLoader}
                       unoptimized
                       alt={i.name}
@@ -123,24 +123,26 @@ const Cart = ({ wines }: any) => {
                       <li>Quantidade: {i.qty}</li>
                     </ul>
                   </div>
-                  <AddButtons
-                    onClick={({ target }) => actualize(target)}
-                    value={i.id}
-                  >
-                    +
-                  </AddButtons>
-                  <AddButtons
-                    onClick={({ target }) => handleDelete(target, "minus")}
-                    value={i.id}
-                  >
-                    -
-                  </AddButtons>
-                  <AddButtons
-                    onClick={({ target }) => handleDelete(target, "delete")}
-                    value={i.id}
-                  >
-                    Deletar
-                  </AddButtons>
+                  <div style={{ textAlign: "center" }}>
+                    <AddButtons
+                      onClick={({ target }) => actualize(target)}
+                      value={i.id}
+                    >
+                      +
+                    </AddButtons>
+                    <AddButtons
+                      onClick={({ target }) => handleDelete(target, "minus")}
+                      value={i.id}
+                    >
+                      -
+                    </AddButtons>
+                    <AddButtons
+                      onClick={({ target }) => handleDelete(target, "delete")}
+                      value={i.id}
+                    >
+                      Deletar
+                    </AddButtons>
+                  </div>
                 </CardDiv>
               );
             })
