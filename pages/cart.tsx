@@ -7,7 +7,12 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import imageLoader from "../imageLoader";
 import { handleSubmit } from "../functions/handleSubmit";
-import { ContainerCard, CardDiv, AddButtons } from "../styles/main";
+import {
+  ContainerCard,
+  CardDiv,
+  AddButtons,
+  ContainerWines,
+} from "../styles/main";
 
 const Cart = ({ wines }: any) => {
   const [empty, setEmpty] = useState(false);
@@ -93,6 +98,7 @@ const Cart = ({ wines }: any) => {
           style={{
             display: "flex",
             flexDirection: "row",
+            justifyContent: "center",
             flexWrap: "wrap",
             gridArea: "c",
           }}
