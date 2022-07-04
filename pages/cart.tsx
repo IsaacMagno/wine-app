@@ -88,11 +88,12 @@ const Cart = ({ wines }: any) => {
         <meta name='description' content='Carrinho de compras' />
       </Head>
       <Header />
-      <ContainerCard>
+      <ContainerCard style={{ height: "80rem" }}>
         <div
           style={{
             display: "flex",
             flexDirection: "row",
+            flexWrap: "wrap",
             gridArea: "c",
           }}
         >
@@ -146,6 +147,7 @@ const Cart = ({ wines }: any) => {
           )}
         </div>
       </ContainerCard>
+      <span style={{ marginLeft: "40%" }}>Desenvolvido por @IsaacMagno</span>
     </div>
   );
 };

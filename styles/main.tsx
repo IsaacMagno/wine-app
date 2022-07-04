@@ -28,7 +28,7 @@ export const ContainerDetails = styled.div`
 
 export const ContainerCard = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 10fr;
   grid-template-rows: 5vh 50vh 45vh;
 
   grid-template-areas:
@@ -168,12 +168,15 @@ export const DetailsDiv = styled.div`
 `;
 
 export const CardDiv = styled.div`
+  width: 18rem;
+  height: 22rem;
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
   margin: 3px;
-  padding: 3rem;
+  margin-left: 10px;
+  padding: 1rem;
 `;
 
 export const ImageDiv = styled.div`
