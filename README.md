@@ -9,7 +9,8 @@ Nunca tive contato antes com as tecnologias utilizadas, no tempo de 3 dias estud
 ### Principais Tecnologias utilizadas
 
 - [x] NextJs
-- [x] StyledComponents/Css
+- [x] StyledComponents
+- [x] Css
 - [x] TypeScript
 
 ### Como utilizar
@@ -27,6 +28,6 @@ Nunca tive contato antes com as tecnologias utilizadas, no tempo de 3 dias estud
 
 - ``` npm run dev```
 
-##### Acesse a aplicação <a href="">Online</a>
+##### Acesse a aplicação <a href="https://wine-shopping-app.herokuapp.com/">Online</a>
 
 ##### Projeto desenvolvido por @IsaacMagno
